@@ -1,11 +1,13 @@
-// src/compiler/compile.ts
+import { tokenize } from "../lexer/lexer";
 
 export function compile(sourceCode: string, canvas: HTMLCanvasElement) {
   console.log("Starting compilation...");
   
-  // 1️⃣ Lexical Analysis (placeholder)
+  // 1️⃣ Lexical Analysis
   console.log("Step 1: Lexing input...");
-  // const lexResult = tokenize(sourceCode);
+  const lexResult = tokenize(sourceCode);
+  console.log("Tokens:", lexResult.tokens);
+
 
   // 2️⃣ Parsing (placeholder)
   console.log("Step 2: Parsing tokens...");

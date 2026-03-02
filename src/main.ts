@@ -8,14 +8,15 @@ document.body.appendChild(canvas);
 
 const sourceCode = `
 div {
-  width: 200px;
-  height: 100px;
-}
+      width: 50%;
+      height: 200.5px;
+      background-color: #ff0000;
+    }
 `;
 
 compile(sourceCode, canvas);
 
- //Lexer Testing...
+ /*Lexer Testing...
 
 import { HtmlLexer } from "./lexer/lexer";
 
@@ -23,4 +24,4 @@ const input = `<div class="box">Hello</div>`;
 
 const lexResult = HtmlLexer.tokenize(input);
 
-console.log(lexResult.tokens);
+console.log(lexResult.tokens);*/
