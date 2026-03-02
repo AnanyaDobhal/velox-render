@@ -6,22 +6,32 @@ canvas.height = 600;
 
 document.body.appendChild(canvas);
 
-const sourceCode = `
+// VALID EXAMPLE
+const validSourceCode = `
 div {
-      width: 50%;
-      height: 200.5px;
-      background-color: #ff0000;
-    }
+  width: 50%;
+  height: 200.5px;
+  background-color: #ff0000;
+}
+span {
+  margin: 10px;
+  padding: 5;
+  background-color: transparent;
+}
 `;
 
-compile(sourceCode, canvas);
+console.log("--- TEST 1: Valid Source Code ---");
+compile(validSourceCode, canvas);
 
- /*Lexer Testing...
 
-import { HtmlLexer } from "./lexer/lexer";
+// INVALID EXAMPLE
+const invalidSourceCode = `
+div {
+  width: 50%;
+  height 200.5px;
+  background-color: #ff0000;
+}
+`;
 
-const input = `<div class="box">Hello</div>`;
-
-const lexResult = HtmlLexer.tokenize(input);
-
-console.log(lexResult.tokens);*/
+console.log("\\n--- TEST 2: Invalid Source Code ---");
+compile(invalidSourceCode, canvas);
