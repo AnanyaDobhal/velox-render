@@ -38,6 +38,37 @@ http://localhost:5173
 -------------------------------------------------
 
 
+//LEXER Using Chevrotain
+
+EXAMPLE:
+Input:
+<div class="box">Hello</div>
+[
+  OpenAngle,
+  Identifier(div),
+  Identifier(class),
+  Equals,
+  StringLiteral("box"),
+  CloseAngle,
+  Text(Hello),
+  OpenAngle,
+  Slash,
+  Identifier(div),
+  CloseAngle
+]
+
+
+To Run:
+npm run dev
+
+
+
+
+
+
+
+
+
 
 
 
