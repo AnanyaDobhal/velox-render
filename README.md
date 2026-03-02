@@ -30,3 +30,16 @@ Run Container Using:
 docker run -p 5173:5173 velox-render
 Now open browser:
 http://localhost:5173
+
+------------------------------------------------
+//Github: git add .
+          git commit -m "added tokens"
+          git push origin main
+-------------------------------------------------
+
+
+
+
+
+
+
