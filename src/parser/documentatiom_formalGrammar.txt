@@ -1,0 +1,27 @@
+<stylesheet> ::= <rule>*
+
+<rule> ::= <selector> "{" <declaration>* "}"
+
+<selector> ::= "div"
+             | "span"
+
+<declaration> ::= <property> ":" <value> ";"
+
+<property> ::= "background-color"
+             | "width"
+             | "height"
+             | "margin"
+             | "padding"
+
+<value> ::= <hexColor>
+          | <identifier>
+          | <numberLiteral> <unit>?
+
+<unit> ::= "px"
+         | "%"
+
+<numberLiteral> ::= digit+ ("." digit+)?
+
+<hexColor> ::= "#" hexDigit{3,6}
+
+<identifier> ::= letter (letter | digit | "_" | "-")*
