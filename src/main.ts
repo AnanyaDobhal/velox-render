@@ -14,3 +14,13 @@ div {
 `;
 
 compile(sourceCode, canvas);
+
+ //Lexer Testing...
+
+import { HtmlLexer } from "./lexer/lexer";
+
+const input = `<div class="box">Hello</div>`;
+
+const lexResult = HtmlLexer.tokenize(input);
+
+console.log(lexResult.tokens);
