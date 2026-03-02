@@ -3,7 +3,11 @@ main.ts
    ↓
 compile()
    ↓
-Canvas
+tokenize()
+   ↓
+VeloxLexer
+   ↓
+Tokens
 
 Later it becomes:
 main.ts
@@ -60,6 +64,7 @@ Input:
 
 To Run:
 npm run dev
+
 
 
 
