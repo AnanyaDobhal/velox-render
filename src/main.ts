@@ -18,6 +18,14 @@ span {
   padding: 5;
   background-color: transparent;
 }
+div {
+  width: 400px;
+
+  div {
+    margin: 10px;
+    padding: 5px;
+  }
+}
 `;
 
 console.log("--- TEST 1: Valid Source Code ---");

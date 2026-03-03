@@ -37,9 +37,16 @@ export class VeloxParser extends CstParser {
         this.SUBRULE(this.selector);
         this.CONSUME(LCurly);
         this.MANY(() => {
-            this.SUBRULE(this.declaration);
+            this.SUBRULE(this.blockItem);
         });
         this.CONSUME(RCurly);
+    });
+
+    public blockItem = this.RULE("blockItem", () => {
+        this.OR([
+            { ALT: () => this.SUBRULE(this.declaration) },
+            { ALT: () => this.SUBRULE(this.rule) }
+        ]);
     });
 
     // <selector> ::= "div" | "span"
