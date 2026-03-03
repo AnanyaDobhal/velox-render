@@ -1,5 +1,6 @@
 import { tokenize } from "../lexer/lexer";
 import { parserInstance } from "../parser/parser";
+import { ASTBuilder } from "../ast/astbuilder";
 
 export function compile(sourceCode: string, canvas: HTMLCanvasElement) {
   console.log("Starting compilation...");
@@ -16,32 +17,36 @@ export function compile(sourceCode: string, canvas: HTMLCanvasElement) {
   // 2️⃣ Parsing
   console.log("Step 2: Parsing tokens...");
 
-  // Provide tokens to the parser
   parserInstance.input = lexResult.tokens;
 
-  // Parse starting at the root rule: 'stylesheet'
   const cst = parserInstance.stylesheet();
 
-  // Handle parsing errors
- if (parserInstance.errors.length > 0) {
-  console.error("Parsing Errors Detected:");
+  if (parserInstance.errors.length > 0) {
+    console.error("Parsing Errors Detected:");
 
-  parserInstance.errors.forEach((err) => {
-    console.error(
-      `Line ${err.token.startLine}, Column ${err.token.startColumn}: ${err.message}`
-    );
-  });
+    parserInstance.errors.forEach((err) => {
+      console.error(
+        `Line ${err.token.startLine}, Column ${err.token.startColumn}: ${err.message}`
+      );
+    });
 
-  return null;
-}
+    return null;
+  }
 
-  console.log("Parsing successful! CST Generated.", cst);
+  console.log("Parsing successful! CST Generated.");
+  console.log("===== CST OUTPUT =====");
+  console.log(JSON.stringify(cst, null, 2));
 
-  // 3️⃣ Semantic + Layout (placeholder)
-  console.log("Step 3: Generating layout...");
-  // const layoutTree = layoutEngine(ast);
+  // 3️⃣ AST Generation (YOUR TASK 🔥)
+  console.log("Step 3: Building AST...");
 
-  // 4️⃣ Code Generation (temporary demo)
+  const astBuilder = new ASTBuilder();
+  const ast = astBuilder.visit(cst);
+
+  console.log("===== AST OUTPUT =====");
+  console.log(JSON.stringify(ast, null, 2));
+
+  // 4️⃣ Rendering (temporary demo)
   console.log("Step 4: Rendering to canvas...");
 
   const ctx = canvas.getContext("2d");
@@ -50,10 +55,13 @@ export function compile(sourceCode: string, canvas: HTMLCanvasElement) {
     throw new Error("Canvas context not available");
   }
 
-  // Temporary demo rendering
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Temporary static demo render
   ctx.fillStyle = "blue";
   ctx.fillRect(100, 100, 200, 150);
 
   console.log("Compilation finished.");
+
+  return ast; // optional but good practice
 }
