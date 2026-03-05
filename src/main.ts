@@ -9,21 +9,11 @@ document.body.appendChild(canvas);
 // VALID EXAMPLE
 const validSourceCode = `
 div {
-  width: 50%;
-  height: 200.5px;
-  background-color: #ff0000;
-}
-span {
-  margin: 10px;
-  padding: 5;
-  background-color: transparent;
-}
-div {
-  width: 400px;
+  width: 200px;
+  height: 100px;
 
-  div {
+  span {
     margin: 10px;
-    padding: 5px;
   }
 }
 `;
@@ -31,15 +21,17 @@ div {
 console.log("--- TEST 1: Valid Source Code ---");
 compile(validSourceCode, canvas);
 
-
 // INVALID EXAMPLE
-const invalidSourceCode = `
+const InvalidSourceCode = `
 div {
-  width: 50%;
-  height 200.5px;
-  background-color: #ff0000;
+  width: 200px;
+  height 100px;
+
+  span {
+    margin: 10px;
+  }
 }
 `;
 
-console.log("\\n--- TEST 2: Invalid Source Code ---");
-compile(invalidSourceCode, canvas);
+console.log("--- TEST 1: Valid Source Code ---");
+compile(InvalidSourceCode, canvas);

@@ -74,20 +74,6 @@ export const Identifier = createToken({
 });
 
 /* ========================= */
-/*          UNITS            */
-/* ========================= */
-
-export const Px = createToken({
-  name: "Px",
-  pattern: /px/
-});
-
-export const Percent = createToken({
-  name: "Percent",
-  pattern: /%/
-});
-
-/* ========================= */
 /*          SYMBOLS          */
 /* ========================= */
 
@@ -126,10 +112,6 @@ export const allTokens = [
   Padding,
   Div,
   Span,
-
-  // Units
-  Px,
-  Percent,
 
   // Literals
   HexColor,

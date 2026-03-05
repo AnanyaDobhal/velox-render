@@ -46,10 +46,10 @@ export class ASTBuilder extends BaseVisitor {
   }
 
  selector(ctx: any) {
-  return ctx.children?.Identifier
-    ? ctx.children.Identifier[0].image
-    : "";
-  }
+  if (ctx.Div) return ctx.Div[0].image;
+  if (ctx.Span) return ctx.Span[0].image;
+  return "";
+}
 
   blockItem(ctx: any) {
     if (ctx.declaration) {
@@ -78,22 +78,32 @@ export class ASTBuilder extends BaseVisitor {
   }
 
   property(ctx: any) {
-  return ctx.children?.Identifier
-    ? ctx.children.Identifier[0].image
-    : "";
+    const token =
+      ctx.Width ||
+      ctx.Height ||
+      ctx.Margin ||
+      ctx.Padding ||
+      ctx.BackgroundColor;
+
+    return token ? token[0].image : "";
   }
 
   value(ctx: any) {
+    if (ctx.HexColor) {
+      return ctx.HexColor[0].image;
+    }
     if (ctx.NumberLiteral) {
-      return ctx.NumberLiteral[0].image;
+      const num = ctx.NumberLiteral[0].image;
+
+      if (ctx.Identifier) {
+        return num + ctx.Identifier[0].image;
+      }
+
+      return num;
     }
 
     if (ctx.Identifier) {
       return ctx.Identifier[0].image;
-    }
-
-    if (ctx.HexColor) {
-      return ctx.HexColor[0].image;
     }
 
     return "";

@@ -11,8 +11,6 @@ import {
     NumberLiteral,
     HexColor,
     Identifier,
-    Px,
-    Percent,
     LCurly,
     RCurly,
     Colon,
@@ -78,27 +76,22 @@ export class VeloxParser extends CstParser {
 
     // <value> ::= <HexColor> | <Identifier> | <NumberLiteral> <unit>?
     public value = this.RULE("value", () => {
-        this.OR([
-            { ALT: () => this.CONSUME(HexColor) },
-            { ALT: () => this.CONSUME(Identifier) },
-            {
-                ALT: () => {
-                    this.CONSUME(NumberLiteral);
-                    this.OPTION(() => {
-                        this.SUBRULE(this.unit);
-                    });
-                }
-            }
-        ]);
-    });
+    this.OR([
+        { ALT: () => this.CONSUME(HexColor) },
 
-    // <unit> ::= "px" | "%"
-    public unit = this.RULE("unit", () => {
-        this.OR([
-            { ALT: () => this.CONSUME(Px) },
-            { ALT: () => this.CONSUME(Percent) }
-        ]);
-    });
+        {
+            ALT: () => {
+                this.CONSUME(NumberLiteral);
+
+                this.OPTION(() => {
+                    this.CONSUME2(Identifier); // px or %
+                });
+            }
+        },
+
+        { ALT: () => this.CONSUME(Identifier) }
+    ]);
+});
 }
 
 // Instantiate the parser once to be reused
