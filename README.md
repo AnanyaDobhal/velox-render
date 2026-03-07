@@ -60,22 +60,5 @@ Input:
   Identifier(div),
   CloseAngle
 ]
-
-
 To Run:
 npm run dev
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

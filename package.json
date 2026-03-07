@@ -16,7 +16,7 @@
     "vitest": "^4.0.18"
   },
   "dependencies": {
-    "chevrotain": "^11.1.2"
+    "chevrotain": "^11.2.0"
   },
   "description": "🏗 Current Architecture\r main.ts\r    ↓\r compile()\r    ↓\r Canvas",
   "main": "index.js",

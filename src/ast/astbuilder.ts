@@ -46,11 +46,11 @@ export class ASTBuilder extends BaseVisitor {
     };
   }
 
- selector(ctx: any) {
-  if (ctx.Div) return ctx.Div[0].image;
-  if (ctx.Span) return ctx.Span[0].image;
-  return "";
-}
+  selector(ctx: any) {
+    if (ctx.Div) return ctx.Div[0].image;
+    if (ctx.Span) return ctx.Span[0].image;
+    return "";
+  }
 
   blockItem(ctx: any) {
     if (ctx.declaration) {
@@ -93,9 +93,16 @@ export class ASTBuilder extends BaseVisitor {
     if (ctx.HexColor) {
       return ctx.HexColor[0].image;
     }
+
     if (ctx.NumberLiteral) {
       const num = ctx.NumberLiteral[0].image;
 
+      // support %
+      if (ctx.Percent) {
+        return num + "%";
+      }
+
+      // support px, rem, etc
       if (ctx.Identifier) {
         return num + ctx.Identifier[0].image;
       }
