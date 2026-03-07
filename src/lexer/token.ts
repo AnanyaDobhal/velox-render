@@ -9,6 +9,10 @@ export const WhiteSpace = createToken({
   pattern: /\s+/,
   group: Lexer.SKIPPED
 });
+export const Percent = createToken({
+  name: "Percent",
+  pattern: /%/
+});
 
 /* ========================= */
 /*        KEYWORDS           */
@@ -112,6 +116,7 @@ export const allTokens = [
   Padding,
   Div,
   Span,
+  Percent,
 
   // Literals
   HexColor,
