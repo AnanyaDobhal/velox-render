@@ -6,6 +6,7 @@ const BaseVisitor = parserInstance.getBaseCstVisitorConstructor();
 export class ASTBuilder extends BaseVisitor {
   constructor() {
     super();
+    this.validateVisitor(); 
   }
 
   stylesheet(ctx: any): StylesheetNode {
