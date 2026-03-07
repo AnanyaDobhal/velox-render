@@ -11,6 +11,7 @@ export function compile(sourceCode: string, canvas: HTMLCanvasElement) {
     // 1️⃣ Lexical Analysis
   console.log("Step 1: Lexing input...");
   const lexResult = tokenize(sourceCode);
+  console.log(lexResult);
 
   if (lexResult.tokens.length === 0) {
     console.log("No valid tokens found.");

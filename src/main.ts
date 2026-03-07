@@ -24,8 +24,8 @@ compile(validSourceCode, canvas);
 // INVALID EXAMPLE
 const InvalidSourceCode = `
 div {
-  width: 200px;
-  height 100px;
+  width: 200%;
+  height: 100px;
 
   span {
     margin: 10px;
