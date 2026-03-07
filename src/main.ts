@@ -9,7 +9,7 @@ document.body.appendChild(canvas);
 // VALID EXAMPLE
 const validSourceCode = `
 div {
-  width: 200px;
+  width: 200%;
   height: 100px;
 
   span {
@@ -25,7 +25,7 @@ compile(validSourceCode, canvas);
 const InvalidSourceCode = `
 div {
   width: 200%;
-  height: 100px;
+  height 100px;
 
   span {
     margin: 10px;
