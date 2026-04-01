@@ -10,6 +10,9 @@ export interface ComputedStyle {
   margin?: string;
   padding?: string;
   backgroundColor?: string;
+  borderColor?: string;
+  text?: string;
+
 }
 
 export interface StyledRule {
@@ -28,7 +31,9 @@ const DEFAULT_STYLE: Required<ComputedStyle> = {
   height: "auto",
   margin: "0px",
   padding: "0px",
-  backgroundColor: "transparent"
+  backgroundColor: "transparent",
+  borderColor: "black",
+  text: ""
 };
 
 /* ============================== */
@@ -61,6 +66,13 @@ function resolveRule(rule: any): StyledRule {
 
         case "background-color":
           style.backgroundColor = decl.value;
+          break;
+        
+        case "border-color":
+          style.borderColor = decl.value;
+          break;
+        case "text":
+          style.text = decl.value;
           break;
       }
 

@@ -84,7 +84,8 @@ export class ASTBuilder extends BaseVisitor {
       ctx.Height ||
       ctx.Margin ||
       ctx.Padding ||
-      ctx.BackgroundColor;
+      ctx.BackgroundColor ||
+      ctx.Text;
 
     return token ? token[0].image : "";
   }

@@ -16,6 +16,7 @@ import {
     RCurly,
     Colon,
     SemiColon,
+    Text
 } from "../lexer/token";
 
 export class VeloxParser extends CstParser {
@@ -71,7 +72,8 @@ export class VeloxParser extends CstParser {
             { ALT: () => this.CONSUME(Width) },
             { ALT: () => this.CONSUME(Height) },
             { ALT: () => this.CONSUME(Margin) },
-            { ALT: () => this.CONSUME(Padding) }
+            { ALT: () => this.CONSUME(Padding) },
+            { ALT: () => this.CONSUME(Text) } 
         ]);
     });
 

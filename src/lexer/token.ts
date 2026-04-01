@@ -55,6 +55,8 @@ export const Padding = createToken({
   pattern: /padding/
 });
 
+
+
 /* ========================= */
 /*        LITERALS           */
 /* ========================= */
@@ -101,6 +103,11 @@ export const SemiColon = createToken({
   pattern: /;/
 });
 
+export const Text = createToken({
+  name: "Text",
+  pattern: /text/,
+  longer_alt: Identifier
+});
 /* ========================= */
 /*        TOKEN ORDER        */
 /* ========================= */
@@ -114,6 +121,7 @@ export const allTokens = [
   Height,
   Margin,
   Padding,
+  Text,  
   Div,
   Span,
   Percent,

@@ -4,86 +4,96 @@ import { ASTBuilder } from "../ast/astbuilder";
 import { resolveStylesheet } from "../semantic/styleResolver";
 import { validateStylesheet } from "../semantic/styleValidator";
 import { layoutTree } from "../layout/layoutEngine";
+import { renderTree } from "../renderer/canvasRenderer";
 
 export function compile(sourceCode: string, canvas?: HTMLCanvasElement) {
-  console.log("Starting compilation...");
+  console.log("🚀 Starting compilation...");
 
   try {
-    // 1️⃣ Lexical Analysis
-    console.log("Step 1: Lexing input...");
+    /* ============================= */
+    /* 1️⃣ LEXICAL ANALYSIS          */
+    /* ============================= */
+
+    console.log("Step 1: Lexing...");
     const lexResult = tokenize(sourceCode);
 
-    if (lexResult.tokens.length === 0) {
-      console.log("No valid tokens found.");
+    if (!lexResult.tokens.length) {
+      console.warn("⚠️ No tokens generated.");
       return;
     }
 
-    // 2️⃣ Parsing
-    console.log("Step 2: Parsing tokens...");
+    /* ============================= */
+    /* 2️⃣ PARSING                   */
+    /* ============================= */
+
+    console.log("Step 2: Parsing...");
     parserInstance.input = lexResult.tokens;
 
     const cst = parserInstance.stylesheet();
 
     if (parserInstance.errors.length > 0) {
-      console.error("Parsing Error:", parserInstance.errors);
+      console.error("❌ Parsing errors:", parserInstance.errors);
       throw new Error("Parsing failed");
     }
 
-    console.log("Parsing successful! CST Generated.");
-    console.log("===== CST OUTPUT =====");
-    console.log(JSON.stringify(cst, null, 2));
+    console.log("✅ CST Generated");
 
-    // 3️⃣ AST Generation
+    /* ============================= */
+    /* 3️⃣ AST GENERATION            */
+    /* ============================= */
+
     console.log("Step 3: Building AST...");
-    const astBuilder = new ASTBuilder();
-    const ast = astBuilder.visit(cst);
+    const ast = new ASTBuilder().visit(cst);
 
     validateStylesheet(ast);
 
-    console.log("===== AST OUTPUT =====");
-    console.log(JSON.stringify(ast, null, 2));
+    console.log("✅ AST Ready");
 
-    // 4️⃣ Style Resolution
+    /* ============================= */
+    /* 4️⃣ STYLE RESOLUTION          */
+    /* ============================= */
+
+    console.log("Step 4: Resolving styles...");
     const styledTree = resolveStylesheet(ast);
+
     console.log("Styled Tree:", styledTree);
 
-    // 5️⃣ Layout Tree
-    console.log("Step 5: Computing layout tree...");
+    /* ============================= */
+    /* 5️⃣ LAYOUT COMPUTATION        */
+    /* ============================= */
 
-    let layout;
+    console.log("Step 5: Computing layout...");
 
-    if (canvas) {
-      layout = layoutTree(styledTree, canvas.width, canvas.height);
-    } else {
-      // default size for tests
-      layout = layoutTree(styledTree, 800, 600);
-    }
+    const width = canvas?.width ?? 800;
+    const height = canvas?.height ?? 600;
 
-    console.log("===== LAYOUT TREE =====");
+    const layout = layoutTree(styledTree, width, height);
+
+    console.log("✅ Layout Tree Ready");
     console.log(JSON.stringify(layout, null, 2));
 
-    // 6️⃣ Rendering (only if canvas exists)
+    /* ============================= */
+    /* 6️⃣ RENDERING (FIXED)         */
+    /* ============================= */
+
     if (canvas) {
-      console.log("Step 6: Rendering to canvas...");
+      console.log("Step 6: Rendering...");
 
-      const ctx = canvas.getContext("2d");
+      // 👉 USE YOUR REAL RENDERER
+      renderTree(canvas, layout, {
+        debug: true,       // optional: colored boxes
+        showBorder: true
+      });
 
-      if (!ctx) {
-        throw new Error("Canvas context not available");
-      }
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "blue";
-      ctx.fillRect(100, 100, 200, 150);
+      console.log("🎨 Rendering completed");
     }
 
-    console.log("Compilation finished.");
+    console.log("🎉 Compilation finished");
 
     return layout;
 
   } catch (err) {
-    console.error("Compiler Error:", err);
+    console.error("💥 Compiler Error:", err);
     throw err;
   }
 }

@@ -1,23 +1,7 @@
 import { computeBoxModel } from "./boxModel";
-import type { LayoutBox } from "./boxModel";
 import type { StyledRule } from "../semantic/styleResolver";
+import type { LayoutNode } from "../types/layout";
 
-/* ============================== */
-/*        LAYOUT NODE TYPE        */
-/* ============================== */
-
-export interface LayoutNode {
-  selector: string;
-  box: LayoutBox;
-
-  // expose width/height for easier testing
-  width: number;
-  height: number;
-
-  x: number;        // absolute x on canvas
-  y: number;        // absolute y on canvas
-  children: LayoutNode[];
-}
 
 /* ============================== */
 /*        LAYOUT ONE NODE         */
@@ -69,6 +53,8 @@ function layoutNode(
 
     x,
     y,
+    style: rule.style, 
+    text: rule.style.text,
     children
   };
 }

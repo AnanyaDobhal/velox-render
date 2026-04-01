@@ -9,12 +9,16 @@ document.body.appendChild(canvas);
 // VALID EXAMPLE
 const validSourceCode = `
 div {
-  width: 200%;
+  width: 200px;
   height: 100px;
-
-  span {
-    margin: 10px;
-  }
+  background-color: lightblue;
+  text: Hello;
+}
+  div {
+  width: 200px;
+  height: 100px;
+  background-color: pink;
+  text: BYE;
 }
 `;
 

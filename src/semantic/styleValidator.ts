@@ -6,7 +6,9 @@ const VALID_PROPERTIES = [
   "height",
   "margin",
   "padding",
-  "background-color"
+  "background-color",
+  "border-color",
+  "text"
 ]
 
 function isLength(value: string): boolean {
@@ -46,6 +48,16 @@ function validateDeclaration(decl: any) {
         throw new CompilerError(
           `Invalid color value "${value}"`
         )
+      }
+
+    case "border-color":
+      if (!isColor(value)) {
+        throw new Error(`Invalid border color "${value}"`);
+      }
+    
+    case "text":
+      if (typeof value !== "string") {
+        throw new Error("Text must be a string");
       }
 
       break
