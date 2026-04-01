@@ -14,11 +14,11 @@ div {
   background-color: lightblue;
   text: Hello;
 }
-  div {
+div {
   width: 200px;
   height: 100px;
-  background-color: pink;
-  text: BYE;
+  background-color: lightblue;
+  border-radius: 20px;
 }
 `;
 

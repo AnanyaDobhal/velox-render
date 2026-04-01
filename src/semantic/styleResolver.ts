@@ -12,7 +12,7 @@ export interface ComputedStyle {
   backgroundColor?: string;
   borderColor?: string;
   text?: string;
-
+  borderRadius?: string;
 }
 
 export interface StyledRule {
@@ -33,7 +33,8 @@ const DEFAULT_STYLE: Required<ComputedStyle> = {
   padding: "0px",
   backgroundColor: "transparent",
   borderColor: "black",
-  text: ""
+  text: "",
+  borderRadius: "0px"
 };
 
 /* ============================== */
@@ -73,6 +74,9 @@ function resolveRule(rule: any): StyledRule {
           break;
         case "text":
           style.text = decl.value;
+          break;
+        case "border-radius":
+          style.borderRadius = decl.value;
           break;
       }
 

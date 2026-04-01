@@ -40,7 +40,29 @@ export function renderTree(
 /* ========================================= */
 /*           CORE RENDER FUNCTION            */
 /* ========================================= */
+function drawRoundedRect(ctx: CanvasRenderingContext2D, node: any) {
+  const r = parseFloat(node.style.borderRadius || "0");
 
+  const { x, y, width, height } = node;
+
+  ctx.beginPath();
+
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + width - r, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + r);
+
+  ctx.lineTo(x + width, y + height - r);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+
+  ctx.lineTo(x + r, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - r);
+
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+
+  ctx.closePath();
+  ctx.fill();
+}
 function renderNode(
   ctx: CanvasRenderingContext2D,
   node: LayoutNode,
@@ -73,7 +95,7 @@ function renderNode(
 
     if (fillColor !== "transparent") {
       ctx.fillStyle = fillColor;
-      ctx.fillRect(x, y, width, height);
+      drawRoundedRect(ctx, node);
     }
 
     /* ========= DRAW PADDING AREA (debug) ========= */

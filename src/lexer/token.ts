@@ -108,6 +108,12 @@ export const Text = createToken({
   pattern: /text/,
   longer_alt: Identifier
 });
+
+export const BorderRadius = createToken({
+  name: "BorderRadius",
+  pattern: /border-radius/,
+  longer_alt: Identifier
+});
 /* ========================= */
 /*        TOKEN ORDER        */
 /* ========================= */
@@ -121,7 +127,8 @@ export const allTokens = [
   Height,
   Margin,
   Padding,
-  Text,  
+  Text, 
+  BorderRadius, 
   Div,
   Span,
   Percent,

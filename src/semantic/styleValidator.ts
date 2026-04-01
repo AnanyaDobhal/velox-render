@@ -8,7 +8,8 @@ const VALID_PROPERTIES = [
   "padding",
   "background-color",
   "border-color",
-  "text"
+  "text",
+  "border-radius"
 ]
 
 function isLength(value: string): boolean {
@@ -33,34 +34,38 @@ function validateDeclaration(decl: any) {
     case "height":
     case "margin":
     case "padding":
-
       if (!isLength(value)) {
         throw new CompilerError(
           `Invalid value "${value}" for property "${property}"`
         )
       }
-
-      break
+      break;
 
     case "background-color":
-
       if (!isColor(value)) {
         throw new CompilerError(
           `Invalid color value "${value}"`
         )
       }
+      break;
 
     case "border-color":
       if (!isColor(value)) {
         throw new Error(`Invalid border color "${value}"`);
       }
+      break;
     
     case "text":
       if (typeof value !== "string") {
         throw new Error("Text must be a string");
       }
+      break;
 
-      break
+    case "border-radius":
+      if (!/^[0-9]+px$/.test(value)) {
+        throw new Error(`Invalid border-radius value "${value}"`);
+      }
+      break;
   }
 }
 function validateRule(rule: any) {
