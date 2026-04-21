@@ -79,6 +79,18 @@ export const Identifier = createToken({
   pattern: /[a-zA-Z_][a-zA-Z0-9_-]*/
 });
 
+export const Display = createToken({
+  name: "Display",
+  pattern: /display/,
+  longer_alt: Identifier
+});
+
+export const FlexDirection = createToken({
+  name: "FlexDirection",
+  pattern: /flex-direction/,
+  longer_alt: Identifier
+});
+
 /* ========================= */
 /*          SYMBOLS          */
 /* ========================= */
@@ -137,6 +149,8 @@ export const allTokens = [
   HexColor,
   NumberLiteral,
   Identifier,
+  Display,
+  FlexDirection,
 
   // Symbols
   LCurly,

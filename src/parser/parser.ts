@@ -75,7 +75,9 @@ export class VeloxParser extends CstParser {
             { ALT: () => this.CONSUME(Margin) },
             { ALT: () => this.CONSUME(Padding) },
             { ALT: () => this.CONSUME(Text) },
-            { ALT: () => this.CONSUME(BorderRadius) }, 
+            { ALT: () => this.CONSUME(BorderRadius) },
+            { ALT: () => this.CONSUME(Display) },
+            { ALT: () => this.CONSUME(FlexDirection) }, 
         ]);
     });
 

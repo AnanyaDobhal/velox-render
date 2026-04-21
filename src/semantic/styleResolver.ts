@@ -13,6 +13,8 @@ export interface ComputedStyle {
   borderColor?: string;
   text?: string;
   borderRadius?: string;
+  display?: string;
+  flexDirection?: string;
 }
 
 export interface StyledRule {
@@ -34,7 +36,9 @@ const DEFAULT_STYLE: Required<ComputedStyle> = {
   backgroundColor: "transparent",
   borderColor: "black",
   text: "",
-  borderRadius: "0px"
+  borderRadius: "0px",
+  display: "block",
+  flexDirection: "column"
 };
 
 /* ============================== */
@@ -77,6 +81,13 @@ function resolveRule(rule: any): StyledRule {
           break;
         case "border-radius":
           style.borderRadius = decl.value;
+          break;
+        case "display":
+          style.display = decl.value;
+          break;
+
+        case "flex-direction":
+          style.flexDirection = decl.value;
           break;
       }
 
