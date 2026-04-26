@@ -22,14 +22,58 @@ function layoutNode(
   const x = parentX + box.margin.left;
   const y = parentY + box.margin.top;
 
-  // Step 3: layout children — stack vertically inside this node
-  let cursorY = y + box.padding.top;
-  const childX = x + box.padding.left;
+// Step 3: layout children — flex-aware layout
 
-  const children: LayoutNode[] = rule.children.map((child) => {
-    const childNode = layoutNode(
+let cursorX = x + box.padding.left;
+let cursorY = y + box.padding.top;
+
+const children: LayoutNode[] = [];
+
+for (const child of rule.children) {
+
+  let childNode: LayoutNode;
+
+  if (rule.style.display === "flex") {
+
+    if (rule.style.flexDirection === "row") {
+      // 👉 HORIZONTAL LAYOUT
+
+      childNode = layoutNode(
+        child,
+        cursorX,
+        y + box.padding.top,
+        box.contentWidth,
+        box.contentHeight
+      );
+
+      cursorX +=
+        childNode.box.margin.left +
+        childNode.box.width +
+        childNode.box.margin.right;
+
+    } else {
+      // 👉 COLUMN (same as vertical)
+
+      childNode = layoutNode(
+        child,
+        x + box.padding.left,
+        cursorY,
+        box.contentWidth,
+        box.contentHeight
+      );
+
+      cursorY +=
+        childNode.box.margin.top +
+        childNode.box.height +
+        childNode.box.margin.bottom;
+    }
+
+  } else {
+    // 👉 DEFAULT BLOCK LAYOUT
+
+    childNode = layoutNode(
       child,
-      childX,
+      x + box.padding.left,
       cursorY,
       box.contentWidth,
       box.contentHeight
@@ -39,24 +83,20 @@ function layoutNode(
       childNode.box.margin.top +
       childNode.box.height +
       childNode.box.margin.bottom;
-
-    return childNode;
-  });
-
-  return {
-    selector: rule.selector,
-    box,
-
-    // expose dimensions
-    width: box.width,
-    height: box.height,
-
-    x,
-    y,
-    style: rule.style, 
-    text: rule.style.text,
-    children
-  };
+    }
+  children.push(childNode);
+}
+return {
+  selector: rule.selector,
+  box,
+  width: box.width,
+  height: box.height,
+  x,
+  y,
+  style: rule.style,
+  text: rule.style.text,
+  children
+};
 }
 
 /* ============================== */

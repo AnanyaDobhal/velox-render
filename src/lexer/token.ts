@@ -74,21 +74,18 @@ export const HexColor = createToken({
 });
 
 // Named colors or generic identifiers
-export const Identifier = createToken({
-  name: "Identifier",
-  pattern: /[a-zA-Z_][a-zA-Z0-9_-]*/
-});
-
 export const Display = createToken({
   name: "Display",
   pattern: /display/,
-  longer_alt: Identifier
 });
 
 export const FlexDirection = createToken({
   name: "FlexDirection",
   pattern: /flex-direction/,
-  longer_alt: Identifier
+});
+export const Identifier = createToken({
+  name: "Identifier",
+  pattern: /[a-zA-Z_][a-zA-Z0-9_-]*/
 });
 
 /* ========================= */
@@ -148,9 +145,9 @@ export const allTokens = [
   // Literals
   HexColor,
   NumberLiteral,
-  Identifier,
   Display,
   FlexDirection,
+  Identifier,
 
   // Symbols
   LCurly,

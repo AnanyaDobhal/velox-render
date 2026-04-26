@@ -9,7 +9,9 @@ const VALID_PROPERTIES = [
   "background-color",
   "border-color",
   "text",
-  "border-radius"
+  "border-radius",
+  "display",         
+  "flex-direction"    
 ]
 
 function isLength(value: string): boolean {
@@ -51,22 +53,33 @@ function validateDeclaration(decl: any) {
 
     case "border-color":
       if (!isColor(value)) {
-        throw new Error(`Invalid border color "${value}"`);
+        throw new CompilerError(`Invalid border color "${value}"`);
       }
       break;
     
     case "text":
       if (typeof value !== "string") {
-        throw new Error("Text must be a string");
+        throw new CompilerError("Text must be a string");
       }
       break;
 
     case "border-radius":
       if (!/^[0-9]+px$/.test(value)) {
-        throw new Error(`Invalid border-radius value "${value}"`);
+        throw new CompilerError(`Invalid border-radius value "${value}"`);
       }
       break;
-  }
+    case "display":
+      if (value !== "flex" && value !== "block") {
+        throw new CompilerError(`Invalid value "${value}" for property "display"`);
+      }
+      break;
+
+    case "flex-direction":
+      if (value !== "row" && value !== "column") {
+        throw new CompilerError(`Invalid value "${value}" for property "flex-direction"`);
+      }
+      break;
+      }
 }
 function validateRule(rule: any) {
 

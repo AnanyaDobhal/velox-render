@@ -28,14 +28,18 @@ export function compile(sourceCode: string, canvas?: HTMLCanvasElement) {
 
     console.log("Step 2: Parsing...");
     parserInstance.input = lexResult.tokens;
-
+    parserInstance.reset(); 
     const cst = parserInstance.stylesheet();
 
-    if (parserInstance.errors.length > 0) {
-      console.error("❌ Parsing errors:", parserInstance.errors);
-      throw new Error("Parsing failed");
-    }
+  if (parserInstance.errors.length > 0) {
+  console.error("❌ Parsing errors:");
 
+  parserInstance.errors.forEach((err) => {
+    console.error(`➡️ ${err.message}`);
+  });
+
+  throw new Error("Parsing failed");
+  }
     console.log("✅ CST Generated");
 
     /* ============================= */
@@ -44,9 +48,10 @@ export function compile(sourceCode: string, canvas?: HTMLCanvasElement) {
 
     console.log("Step 3: Building AST...");
     const ast = new ASTBuilder().visit(cst);
-
+    // 🔍 DEBUG (VERY IMPORTANT)
+    console.log("🧠 AST Output:");
+    console.log(JSON.stringify(ast, null, 2));
     validateStylesheet(ast);
-
     console.log("✅ AST Ready");
 
     /* ============================= */

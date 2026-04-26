@@ -6,7 +6,10 @@ canvas.height = 600;
 
 document.body.appendChild(canvas);
 
-// VALID EXAMPLE
+/* ============================== */
+/*        TEST 1 (VALID)          */
+/* ============================== */
+
 const validSourceCode = `
 div {
   width: 200px;
@@ -23,9 +26,17 @@ div {
 `;
 
 console.log("--- TEST 1: Valid Source Code ---");
-compile(validSourceCode, canvas);
+try {
+  compile(validSourceCode, canvas);
+  console.log("✅ Test 1 Passed");
+} catch (e) {
+  console.error("❌ Test 1 Failed Unexpectedly", e);
+}
 
-// INVALID EXAMPLE
+/* ============================== */
+/*       TEST 2 (INVALID)         */
+/* ============================== */
+
 const InvalidSourceCode = `
 div {
   width: 200%;
@@ -37,5 +48,43 @@ div {
 }
 `;
 
-console.log("--- TEST 1: Valid Source Code ---");
-compile(InvalidSourceCode, canvas);
+console.log("--- TEST 2: Invalid Source Code ---");
+try {
+  compile(InvalidSourceCode, canvas);
+  console.error("❌ Test 2 Should Have Failed but Passed");
+} catch (e) {
+  console.log("✅ Test 2 Failed as Expected");
+}
+
+/* ============================== */
+/*       TEST 3 (FLEXBOX)         */
+/* ============================== */
+
+const flexSourceCode = `
+div {
+  display: flex;
+  flex-direction: row;
+
+  div {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    text: A;
+  }
+
+  div {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    text: B;
+  }
+}
+`;
+
+console.log("--- TEST 3: Flexbox Row Layout ---");
+try {
+  compile(flexSourceCode, canvas);
+  console.log("✅ Test 3 Completed");
+} catch (e) {
+  console.error("❌ Test 3 Failed", e);
+}

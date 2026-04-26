@@ -79,17 +79,12 @@ export class ASTBuilder extends BaseVisitor {
   }
 
   property(ctx: any) {
-    const token =
-      ctx.Width;
-      ctx.Height; 
-      ctx.Margin ;
-      ctx.Padding ;
-      ctx.BackgroundColor;
-      ctx.BorderRadius;
-      ctx.Text;
-      ctx.Display; 
-      ctx.FlexDirection; 
-    return token ? token[0].image : "";
+  const keys = Object.keys(ctx);
+
+  if (keys.length === 0) return "";
+
+  const tokenKey = keys[0];          // e.g. "Width", "Display"
+  return ctx[tokenKey][0].image;     // extract actual token value
   }
 
   value(ctx: any) {

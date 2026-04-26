@@ -17,7 +17,9 @@ import {
     Colon,
     SemiColon,
     Text,
-    BorderRadius
+    BorderRadius,
+    Display,          
+    FlexDirection       
 } from "../lexer/token";
 
 export class VeloxParser extends CstParser {
