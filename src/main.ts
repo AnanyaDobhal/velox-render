@@ -88,3 +88,43 @@ try {
 } catch (e) {
   console.error("❌ Test 3 Failed", e);
 }
+/* ============================== */
+/*    TEST 4 (PERCENT SIZING)     */
+/* ============================== */
+
+const percentSourceCode = `
+div {
+  width: 400px;
+  height: 200px;
+  padding: 20px;
+  background-color: pink;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  div {
+    width: 45%;
+    height: 50%;
+    margin: 10px;
+    background-color: red;
+    text: A;
+  }
+
+  div {
+    width: 45%;
+    height: 50%;
+    margin: 10px;
+    background-color: blue;
+    text: B;
+  }
+}
+`;
+
+console.log("--- TEST 4: Percentage Layout ---");
+
+try {
+  compile(percentSourceCode, canvas);
+  console.log("✅ Test 4 Completed");
+} catch (e) {
+  console.error("❌ Test 4 Failed", e);
+}

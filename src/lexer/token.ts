@@ -49,7 +49,14 @@ export const Margin = createToken({
   name: "Margin",
   pattern: /margin/
 });
-
+export const JustifyContent = createToken({
+  name: "JustifyContent",
+  pattern: /justify-content/
+});
+export const AlignItems = createToken({
+  name: "AlignItems",
+  pattern: /align-items/
+});
 export const Padding = createToken({
   name: "Padding",
   pattern: /padding/
@@ -141,6 +148,8 @@ export const allTokens = [
   Div,
   Span,
   Percent,
+  JustifyContent,
+  AlignItems,
 
   // Literals
   HexColor,

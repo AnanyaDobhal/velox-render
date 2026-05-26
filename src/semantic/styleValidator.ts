@@ -11,7 +11,9 @@ const VALID_PROPERTIES = [
   "text",
   "border-radius",
   "display",         
-  "flex-direction"    
+  "flex-direction",
+  "justify-content",
+  "align-items"
 ]
 
 function isLength(value: string): boolean {
@@ -79,8 +81,29 @@ function validateDeclaration(decl: any) {
         throw new CompilerError(`Invalid value "${value}" for property "flex-direction"`);
       }
       break;
+    case "align-items":
+      if (
+        value !== "flex-start" &&
+        value !== "center" &&
+        value !== "flex-end"
+      ) {
+          throw new CompilerError(
+            `Invalid align-items value "${value}"`
+          );
+        }
+        break;
+    case "justify-content":
+      if (
+        value !== "flex-start" &&
+        value !== "center" &&
+        value !== "flex-end"
+      ) {
+        throw new CompilerError(
+          `Invalid justify-content value "${value}"`
+        );
       }
-}
+      break;
+}}
 function validateRule(rule: any) {
 
   if (rule.declarations) {

@@ -15,6 +15,8 @@ export interface ComputedStyle {
   borderRadius?: string;
   display?: string;
   flexDirection?: string;
+  justifyContent?: string;
+  alignItems?: string;
 }
 
 export interface StyledRule {
@@ -38,7 +40,9 @@ const DEFAULT_STYLE: Required<ComputedStyle> = {
   text: "",
   borderRadius: "0px",
   display: "block",
-  flexDirection: "column"
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  alignItems: "flex-start"
 };
 
 /* ============================== */
@@ -88,6 +92,12 @@ function resolveRule(rule: any): StyledRule {
 
         case "flex-direction":
           style.flexDirection = decl.value;
+          break;
+        case "justify-content":
+          style.justifyContent = decl.value;
+          break;
+        case "align-items":
+          style.alignItems = decl.value;
           break;
       }
 

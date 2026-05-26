@@ -1,18 +1,14 @@
 import type { LayoutNode } from "../types/layout";
-
 /* ========================================= */
 /*           RENDERER OPTIONS                */
 /* ========================================= */
-
 interface RenderOptions {
   debug?: boolean;        // Show borders & colors
   showBorder?: boolean;   // Force border rendering
 }
-
 /* ========================================= */
 /*           MAIN ENTRY FUNCTION             */
 /* ========================================= */
-
 export function renderTree(
   canvas: HTMLCanvasElement,
   rootNodes: LayoutNode[],

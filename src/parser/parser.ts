@@ -19,7 +19,9 @@ import {
     Text,
     BorderRadius,
     Display,          
-    FlexDirection       
+    FlexDirection,
+    JustifyContent,
+    AlignItems,       
 } from "../lexer/token";
 
 export class VeloxParser extends CstParser {
@@ -79,7 +81,9 @@ export class VeloxParser extends CstParser {
             { ALT: () => this.CONSUME(Text) },
             { ALT: () => this.CONSUME(BorderRadius) },
             { ALT: () => this.CONSUME(Display) },
+            { ALT: () => this.CONSUME(JustifyContent) },
             { ALT: () => this.CONSUME(FlexDirection) }, 
+            { ALT: () => this.CONSUME(AlignItems) },
         ]);
     });
 
